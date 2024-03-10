@@ -12,7 +12,7 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        'gradient-blur' :'background: linear-gradient(89.04deg, #000000 24.06%, rgba(0, 0, 0, 0) 99.24%)',
+        'gradient-blur' :'linear-gradient(89.04deg, #000000 24.06%, rgba(0, 0, 0, 0) 99.24%)',
         'blurred':'rgba(0, 0, 0, 0.7)'
       },
       colors:{
