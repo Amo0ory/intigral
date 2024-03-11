@@ -1,8 +1,8 @@
 import Image from 'next/image'
 import React from 'react'
-
+import {CategoryProps} from '@/app/types/global'
  
-const CategoryCard = ({image, label}: {image:string,label:string}) => {
+const CategoryCard = ({image, label}: CategoryProps) => {
   return (
     <div className='relative'>
         <div

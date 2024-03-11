@@ -3,10 +3,12 @@ import Navigation from '../Navigation'
   
 const Layout= ({children}:{children: any}) => {
   return (
-    <Fragment>
+    <div className='relative flex flex-row'>
         <Navigation/>
-        {children}
-    </Fragment>
+        <div className='z-40 w-full'>
+          {children}
+        </div>
+    </div>
   )
 }
 

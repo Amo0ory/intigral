@@ -1,7 +1,7 @@
 'use client'
 import { HTMLMotionProps, motion } from "framer-motion"
 import Image from "next/image"
-import { useState } from "react"
+import { FC, useState } from "react"
 import { BiCameraMovie } from "react-icons/bi"
 import { BsCameraReels } from "react-icons/bs"
 import { CiSearch } from "react-icons/ci"
@@ -11,31 +11,31 @@ import { RiHome2Line } from "react-icons/ri"
 
  
  
-const Navigation: React.FC  = () => {
-  const [width, setWidth] = useState<number>(60)
+const Navigation: FC  = () => {
+  const [width, setWidth] = useState<number>(80)
   const [open, setOpen] = useState<boolean>(false)
 
   const handleWidth = () =>{
-    if(width <= 60){
-      setWidth(212)
+    if(width <= 80){
+      setWidth(300)
       setOpen(true)
     }else{
-      setWidth(60)
+      setWidth(80)
       setOpen(false)
     }
   }
 
   return (
     <motion.header 
-    initials={{
-      width: 60
+    initial={{
+      width: width
     }}
     animate={{
       width:width
     }}
     
-    className="max-w-[212px] fixed h-screen pr-[23px] pl-[15px] overflow-hidden">
-        <nav className="flex flex-col h-screen justify-between items-stretch">
+    className="max-w-[340px] bg-black z-50 absolute h-full pr-[23px] py-[30px] pl-[15px] overflow-hidden">
+        <nav className="flex flex-col h-full justify-between items-stretch">
           <div className="flex flex-row space-x-2 items-center" >
             <Image 
               width={60} 
