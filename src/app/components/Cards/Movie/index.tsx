@@ -5,7 +5,7 @@ import Rating from "@/app/components/UI/Rating";
 import Button from "@/app/components/UI/Button";
 import { CiHeart } from "react-icons/ci";
 import { FaHeart } from "react-icons/fa";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useInView } from "framer-motion";
 import { MovieProps, MovieModalProps } from "@/app/types/global";
 const MovieCard = ({
   id,
@@ -13,8 +13,11 @@ const MovieCard = ({
   title,
   withDetails = false,
   description = "",
+   
 }: MovieProps) => {
   const [isHovered, setIsHovered] = useState<boolean>(false);
+
+ 
   const handleOpen = () => {
     setIsHovered(true);
   };

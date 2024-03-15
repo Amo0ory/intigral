@@ -1,18 +1,23 @@
 import { Dispatch, SetStateAction } from "react";
 
-export type CategoryProps = {
-  image: string;
-  label: string;
-};
-
-export type MovieProps = {
+export interface CategoryProps {
   id: string;
   image: string;
   title: string;
+  link?: string;
+};
+
+export interface MovieProps {
+  id: string;
+  image: string;
+  title: string;
+  link?: string;
   withDetails?: boolean;
   description?: string;
 };
+
 export type Movies = MovieProps[];
+
 export interface MovieModalProps extends MovieProps {
   isOpen?: boolean;
   setIsOpen?: Dispatch<SetStateAction<boolean>> | undefined
@@ -25,3 +30,9 @@ export type ButtonProps = {
   className?: string;
   onClick?: () => void;
 };
+
+export type CarouselProps = {
+  data: MovieProps[] & CategoryProps[]
+  type:'movies'|'categories'
+  title?: string
+}

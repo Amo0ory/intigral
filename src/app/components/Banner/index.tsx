@@ -12,9 +12,7 @@ const Banner = () => {
             src={banner.image} 
             width={1440} 
             height={730}
-            objectFit='fill'
         /> 
-        <div className='absolute z-0 top-0 left-0 w-[100vw] h-[100vh] bg-black opacity-25' />
         <div className='absolute z-0 left-0 bottom-0 w-[100%] h-[329px] bg-gradient-to-t from-black to-black/0 opacity-25' />
         <div className='absolute z-0 left-10 bottom-0 w-[329.35px] h-[100%] bg-gradient-to-r from-black to-black/0 opacity-25' />
         <div className='relative z-10'>

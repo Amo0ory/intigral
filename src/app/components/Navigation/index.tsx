@@ -1,31 +1,35 @@
 'use client'
 import { HTMLMotionProps, motion } from "framer-motion"
 import Image from "next/image"
-import { FC, useState } from "react"
+import { FC, useState ,SVGProps} from "react"
 import { BiCameraMovie } from "react-icons/bi"
 import { BsCameraReels } from "react-icons/bs"
 import { CiSearch } from "react-icons/ci"
 import { IoIosTrendingUp } from "react-icons/io"
 import { IoSettingsOutline } from "react-icons/io5"
 import { RiHome2Line } from "react-icons/ri"
-
- 
  
 const Navigation: FC  = () => {
   const [width, setWidth] = useState<number>(80)
   const [open, setOpen] = useState<boolean>(false)
-
   const handleWidth = () =>{
     if(width <= 80){
-      setWidth(300)
-      setOpen(true)
-    }else{
-      setWidth(80)
-      setOpen(false)
+      handleOpen()
     }
   }
 
+  const handleClose =() =>{
+    setOpen(false);
+    setWidth(80)
+  }
+ 
+  const handleOpen =() =>{
+      setWidth(300)
+      setOpen(true)
+  }
+ 
   return (
+    <div className="">
     <motion.header 
     initial={{
       width: width
@@ -33,9 +37,8 @@ const Navigation: FC  = () => {
     animate={{
       width:width
     }}
-    
-    className="max-w-[340px] bg-black z-50 absolute h-full pr-[23px] py-[30px] pl-[15px] overflow-hidden">
-        <nav className="flex flex-col h-full justify-between items-stretch">
+    className="max-w-[340px] bg-black z-50 absolute h-full pr-[23px] py-[30px] pl-[15px] ">
+        <nav className="relative flex flex-col h-full justify-between items-stretch overflow-hidden z-30">
           <div className="flex flex-row space-x-2 items-center" >
             <Image 
               width={60} 
@@ -45,11 +48,11 @@ const Navigation: FC  = () => {
             <h2 className="text-[32px]">Play</h2>
           </div>
          <ul className="space-y-12 min-w-full">
-            <Item onClick={handleWidth} title='Search' Icon={CiSearch}/>
-            <Item onClick={handleWidth} title='Home' Icon={RiHome2Line}/>
-            <Item onClick={handleWidth} title='Trending' Icon={IoIosTrendingUp}/>
-            <Item onClick={handleWidth} title='Web Series' Icon={BsCameraReels}/>
-            <Item onClick={handleWidth} title='Movies' Icon={BsCameraReels}/>
+            <Item onClick={handleWidth} open={open} title='Search' Icon={CiSearch}/>
+            <Item onClick={handleWidth} open={open} title='Home' Icon={RiHome2Line}/>
+            <Item onClick={handleWidth} open={open} title='Trending' Icon={IoIosTrendingUp}/>
+            <Item onClick={handleWidth} open={open} title='Web Series' Icon={BsCameraReels}/>
+            <Item onClick={handleWidth} open={open} title='Movies' Icon={BsCameraReels}/>
          </ul>
          <div className="space-y-7 min-w-[212px]">
           <button className="flex flex-row w-full  justify-between text-[22px]"> 
@@ -64,40 +67,61 @@ const Navigation: FC  = () => {
           </button>
          </div>
         </nav>
-         
+         {open && <motion.div 
+         initial={{
+          opacity:0
+         }}
+         animate={{
+          opacity:1
+         }}
+         transition={{
+          duration:0.5
+         }}
+         style={{
+          background:"linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 29%)"
+         }}
+         onClick={handleClose} className="absolute z-10 top-0 w-screen h-screen "/>}
     </motion.header>
+    </div>
   )
 }
 
 export default Navigation
 
-
 interface ItemProps {
   title: string;
-  Icon: React.FC<React.SVGProps<SVGSVGElement>>;
+  Icon: FC<SVGProps<SVGSVGElement>>;
   onClick: () => void;
   open?: boolean
 }
-const Item: React.FC<ItemProps> = ({ title, Icon, onClick, open }) => { 
+const Item: FC<ItemProps> = ({ title, Icon, onClick, open }) => { 
   const [isHovered, setHovered] = useState(false)
-
+ 
   return (
     <motion.li 
     onClick={onClick}
+    onHoverStart={(e) =>{
+      setHovered(true)
+     } }
+     onHoverEnd={(e) =>{
+      setHovered(false)
+     }}
     className="flex flex-row text-unfocused hover:text-white  cursor-pointer min-w-[216px] w-full transition-colors duration-200 justify-between items-center text-[22px]">
       <Icon className="text-[30px] w-[60px]"/>
+      {<motion.span 
+     className="relative flex flex-col w-[60px] text-center items-center whitespace-nowrap">
+         {!open && isHovered && <motion.hr 
+        className="absolute left-[-50px] top-[20px] w-full m-0 p-0 border-none h-[2px] bg-accent" />}
+      </motion.span>}
       <motion.span 
-        onHoverStart={(e) =>{
-          setHovered(true)
-         } }
-         onHoverEnd={(e) =>{
-          setHovered(false)
-         }}
+        
       className="relative flex flex-col w-1/2 text-center items-center whitespace-nowrap">
         {title}
-        {!open && isHovered && <motion.hr 
+        {open && isHovered && <motion.hr 
         className="absolute top-full w-full m-0 p-0 border-none h-[2px] bg-accent" />}
       </motion.span>
     </motion.li>
   )
 }
+
+ 
